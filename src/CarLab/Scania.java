@@ -16,8 +16,8 @@ public class Scania extends Car {
      *
      * @param licensePlate is an id-name
      */
-    public Scania(String licensePlate) {
-        super(2, 100, 5, Color.white, "CarLab.Scania", licensePlate);
+    public Scania(String licensePlate, double x, double y) {
+        super(2, 100, 5, Color.white, "CarLab.Scania", licensePlate, x, y);
         platform = new Platform(4);
     }
 

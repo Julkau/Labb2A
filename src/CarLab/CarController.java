@@ -31,7 +31,9 @@ public class CarController {
         // Instance of this class
         CarController cc = new CarController();
 
-        cc.cars.add(new Volvo240("GYU438"));
+        cc.cars.add(new Volvo240("GYU438", 0, 0));
+        cc.cars.add(new Saab95("AND334", 0, 100));
+        cc.cars.add(new Scania("OOI134", 0, 200));
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -49,7 +51,7 @@ public class CarController {
                 car.move();
                 int x = (int) Math.round(car.getCoordinate()[0]);
                 int y = (int) Math.round(car.getCoordinate()[1]);
-                frame.drawPanel.moveit(x, y);
+                frame.drawPanel.moveit(x, y, car.getClass().getName());
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
             }

@@ -11,6 +11,8 @@ import java.awt.*;
 public class CarTransport extends Car {
     private final Ramp ramp;
 
+    // Are we supposed to have all of the parameters bellow be configurable in the constructor?
+
     /**
      * Creates an CarTransport and a new ramp to it.
      *
@@ -21,8 +23,8 @@ public class CarTransport extends Car {
      * @param rampCapacity is the capacity (number of cars) the ramp has (can hold).
      * @param licensePlate is the id-name for the car. Should be unique.
      */
-    public CarTransport(int doors, double enginePower, Color color, String name, String licensePlate, int rampCapacity) {
-        super(doors, enginePower, 8, color, name, licensePlate);
+    public CarTransport(int doors, double enginePower, Color color, String name, String licensePlate, int rampCapacity, double x, double y) {
+        super(doors, enginePower, 8, color, name, licensePlate, x, y);
         this.ramp = new Ramp(rampCapacity, getLength());
     }
 

@@ -7,7 +7,7 @@ public class TestScania {
 
     @Test
     public void scania_should_not_move_when_platform_is_raised() {
-        Scania scania = new Scania("GYU438");
+        Scania scania = new Scania("GYU438", 0, 0);
         scania.startEngine();
         scania.brake(1);
         scania.raisePlatform(10);
@@ -17,7 +17,7 @@ public class TestScania {
 
     @Test
     public void scania_should_not_move_platform_when_moving() {
-        Scania scania = new Scania("GYU438");
+        Scania scania = new Scania("GYU438", 0, 0);
         scania.startEngine();
         scania.gas(1);
         scania.raisePlatform(10);
@@ -26,7 +26,7 @@ public class TestScania {
 
     @Test
     public void scania_should_move_when_platform_is_raised() {
-        Scania scania = new Scania("GYU438");
+        Scania scania = new Scania("GYU438", 0, 0);
         scania.startEngine();
         scania.brake(1);
         scania.raisePlatform(10);

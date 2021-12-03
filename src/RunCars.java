@@ -14,8 +14,8 @@ public class RunCars {
      * @param arg a string with possible arguments to the program.
      */
     public static void main(String[] arg) {
-        Volvo240 volvo = new Volvo240("abc123");
-        Saab95 saab = new Saab95("abc123");
+        Volvo240 volvo = new Volvo240("abc123", 0, 0);
+        Saab95 saab = new Saab95("abc123", 0, 0);
         Workshop<Volvo240> volvo240Workshop = new Workshop<>(10);
 
         System.out.println("Cars: " + volvo + " " + saab);

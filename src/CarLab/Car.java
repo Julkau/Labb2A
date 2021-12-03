@@ -33,10 +33,10 @@ public abstract class Car implements Movable {
      * @param length       the length of the car.
      * @param licensePlate is the id-name for the car. Should be unique.
      */
-    public Car(int nrDoors, double enginePower, double length, Color color, String modelName, String licensePlate) {
-        this.x = 0;
-        this.y = 0;
-        this.direction = DIRECTION.NORTH;
+    public Car(int nrDoors, double enginePower, double length, Color color, String modelName, String licensePlate, double x, double y) {
+        this.x = x;
+        this.y = y;
+        this.direction = DIRECTION.EAST;
         this.engineOn = false;
         this.currentSpeed = 0;
         this.length = length;
