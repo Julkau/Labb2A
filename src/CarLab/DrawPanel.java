@@ -23,7 +23,6 @@ public class DrawPanel extends JPanel{
 
     // TODO: Make this genereal for all cars
     void moveit(int x, int y, String name){
-        System.out.print(name);
         if (name.equals( "CarLab.Volvo240")) {
             volvoPoint.x = x;
             volvoPoint.y = y;
