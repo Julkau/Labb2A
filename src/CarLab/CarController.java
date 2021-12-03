@@ -58,10 +58,42 @@ public class CarController {
 
     // Calls the gas method for each car once
     void gas(int amount) {
+        System.out.println("gas");
         double gas = ((double) amount) / 100;
-        for (Car car : cars
-                ) {
+        for (Car car : cars) {
             car.gas(gas);
         }
     }
+    void brake(int amount) {
+        System.out.println("brake");
+        double brake = ((double) amount / 100);
+        for (Car car : cars) {
+            car.brake(brake);
+        }
+    }
+    void startEngine() {
+        System.out.println("start engine");
+        for (Car car : cars) {
+            car.startEngine();
+        }
+    }
+    void stopEngine() {
+        System.out.println("stop engine");
+        for (Car car: cars) {
+            car.stopEngine();
+        }
+    }
+    void turnLeft() {
+        System.out.println("turn left");
+        for (Car car: cars) {
+            car.turnLeft();
+        }
+    }
+    void turnRight() {
+        System.out.println("turn right");
+        for (Car car: cars) {
+            car.turnRight();
+        }
+    }
+
 }
