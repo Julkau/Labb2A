@@ -97,5 +97,39 @@ public class CarController {
             car.turnRight();
         }
     }
+    void turnTurboOn() {
+        System.out.println("turbo on");
+        for( Car car : cars){
+            if (car instanceof Saab95) {
+                ((Saab95) car).setTurboOn();
+            }
+        }
+    }
+    void turnTurboOff() {
+        System.out.println("turbo off");
+        for( Car car : cars){
+            if (car instanceof Saab95) {
+                ((Saab95) car).setTurboOff();
+            }
+        }
+    }
+    void lowerPlatform(int amount) {
+        System.out.println("lower platform");
+        double lower = ((double) amount) / 100;
+        for(Car car : cars){
+            if (car instanceof Scania){
+                ((Scania) car).lowerPlatform(lower);
+            }
+        }
+    }
+    void raisePlatform(int amount){
+        System.out.println("raise platform");
+        double raise = ((double) amount) / 100;
+        for(Car car : cars){
+            if (car instanceof Scania){
+                ((Scania) car).raisePlatform(raise);
+            }
+        }
+    }
 
 }
