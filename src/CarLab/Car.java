@@ -36,7 +36,7 @@ public abstract class Car implements Movable {
     public Car(int nrDoors, double enginePower, double length, Color color, String modelName, String licensePlate, double x, double y) {
         this.x = x;
         this.y = y;
-        this.direction = DIRECTION.EAST;
+        this.direction = DIRECTION.NORTH;
         this.engineOn = false;
         this.currentSpeed = 0;
         this.length = length;
@@ -189,13 +189,33 @@ public abstract class Car implements Movable {
     @Override
     public void move() {
         if (direction == DIRECTION.NORTH) {
-            y += getCurrentSpeed();
+            if (y + getCurrentSpeed() <= 560) {
+                y += getCurrentSpeed();
+            } else {
+                turnRight();
+                turnRight();
+            }
         } else if (direction == DIRECTION.EAST) {
-            x += getCurrentSpeed();
+            if (x + getCurrentSpeed() <= 800) {
+                x += getCurrentSpeed();
+            } else {
+                turnRight();
+                turnRight();
+            }
         } else if (direction == DIRECTION.SOUTH) {
-            y -= getCurrentSpeed();
+            if (y - getCurrentSpeed() >= 0) {
+                y -= getCurrentSpeed();
+            } else {
+                turnRight();
+                turnRight();
+            }
         } else if (direction == DIRECTION.WEST) {
-            x -= getCurrentSpeed();
+            if (x - getCurrentSpeed() >= 0) {
+                x -= getCurrentSpeed();
+            } else {
+                turnRight();
+                turnRight();
+            }
         }
     }
 

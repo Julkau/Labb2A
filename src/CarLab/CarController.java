@@ -131,5 +131,21 @@ public class CarController {
             }
         }
     }
+    void turboOn() {
+        System.out.println("turbo on");
+        for (Car car: cars) {
+            if (car.getClass().getName().equals("CarLab.Saab95")) {
+                ((Saab95) car).setTurboOn();
+            }
+        }
+    }
+    void turboOff() {
+        System.out.println("turbo off");
+        for (Car car: cars) {
+            if (car.getClass().getName().equals("CarLab.Saab95")) {
+                ((Saab95) car).setTurboOff();
+            }
+        }
+    }
 
 }

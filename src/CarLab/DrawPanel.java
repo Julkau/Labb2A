@@ -23,7 +23,7 @@ public class DrawPanel extends JPanel{
 
     // TODO: Make this genereal for all cars
     void moveit(int x, int y, String name){
-        if (name.equals( "CarLab.Volvo240")) {
+        if (name.equals("CarLab.Volvo240")) {
             volvoPoint.x = x;
             volvoPoint.y = y;
         }
@@ -64,8 +64,8 @@ public class DrawPanel extends JPanel{
     // TODO: Change to suit your needs.
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(volvoImage, volvoPoint.x, volvoPoint.y, null);
-        g.drawImage(saabImage, saabPoint.x, saabPoint.y, null);
-        g.drawImage(scaniaImage, scaniaPoint.x, scaniaPoint.y, null); // see javadoc for more info on the parameters
+        g.drawImage(volvoImage, volvoPoint.x-30, volvoPoint.y-50, null);
+        g.drawImage(saabImage, saabPoint.x-30, saabPoint.y-50, null);
+        g.drawImage(scaniaImage, scaniaPoint.x-30, scaniaPoint.y-50, null); // see javadoc for more info on the parameters
     }
 }
