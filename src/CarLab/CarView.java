@@ -3,35 +3,32 @@ package CarLab;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.*;
+import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
 // This panel represent the animated part of the view with the car images.
 
-public class CarView extends JPanel{
+public class CarView extends JPanel implements CarObserver{
 
-    // Just a single image, TODO: Generalize
-    BufferedImage volvoImage;
-    BufferedImage saabImage;
-    BufferedImage scaniaImage;
-    // To keep track of a singel cars position
-    Point volvoPoint = new Point();
-    Point saabPoint = new Point();
-    Point scaniaPoint = new Point();
+    private ArrayList<CarSprite> carSprites = new ArrayList<>();
+
+    public void createCarSprite(String image, int x, int y, String licencePlate) {
+        try {
+            carSprites.add(new CarSprite(ImageIO.read(CarView.class.getResourceAsStream(image)), x, y, licencePlate));
+        } catch (IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
 
     // TODO: Make this genereal for all cars
-    void moveit(int x, int y, String name){
-        if (name.equals("CarLab.Volvo240")) {
-            volvoPoint.x = x;
-            volvoPoint.y = y;
-        }
-        if (name.equals("CarLab.Saab95")) {
-            saabPoint.x = x;
-            saabPoint.y = y;
-        }
-        if (name.equals("CarLab.Scania")) {
-            scaniaPoint.x = x;
-            scaniaPoint.y = y;
+    void moveit(int x, int y, String licencePlate){
+        for (CarSprite carSprite: carSprites) {
+            if (carSprite.getLicencePlate().equals(licencePlate)) {
+                carSprite.moveSprite(x, y);
+            }
         }
     }
 
@@ -40,26 +37,18 @@ public class CarView extends JPanel{
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.gray);
-        // Print an error message in case file is not found with a try/catch block
-        try {
-            // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
-            // if you are starting in IntelliJ.
-            volvoImage = ImageIO.read(CarView.class.getResourceAsStream("pics/Volvo240.png"));
-            saabImage = ImageIO.read(CarView.class.getResourceAsStream("pics/Saab95.png"));
-            scaniaImage = ImageIO.read(CarView.class.getResourceAsStream("pics/Scania.png"));
-        } catch (IOException ex)
-        {
-            ex.printStackTrace();
-        }
-
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself
     // TODO: Change to suit your needs.
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(volvoImage, volvoPoint.x-30, volvoPoint.y-50, null);
-        g.drawImage(saabImage, saabPoint.x-30, saabPoint.y-50, null);
-        g.drawImage(scaniaImage, scaniaPoint.x-30, scaniaPoint.y-50, null); // see javadoc for more info on the parameters
+        for (CarSprite carSprite: carSprites){
+            g.drawImage(carSprite.getImage(), carSprite.getX()-30, carSprite.getY()-50, null);
+        }
     }
+
+    //public void notify() {
+
+    //}
 }

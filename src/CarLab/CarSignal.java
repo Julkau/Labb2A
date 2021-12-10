@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -20,10 +21,11 @@ public class CarSignal {
     // each step between delays.
     private Timer timer = new Timer(delay, new TimerListener());
 
-    // The frame that represents this instance View of the MVC pattern
-    CarController frame;
     // A list of cars, modify if needed
     ArrayList<Car> cars = new ArrayList<>();
+
+    //Observers (Wishful programming)
+    private ArrayList<CarObserver> carObservers = new ArrayList<>();
 
     //methods:
 
@@ -34,9 +36,6 @@ public class CarSignal {
         cc.cars.add(new Volvo240("GYU438", 0, 0));
         cc.cars.add(new Saab95("AND334", 0, 100));
         cc.cars.add(new Scania("OOI134", 0, 200));
-
-        // Start a new view and send a reference of self
-        cc.frame = new CarController("CarSim 1.0", cc);
 
         // Start the timer
         cc.timer.start();
@@ -51,7 +50,7 @@ public class CarSignal {
                 car.move();
                 int x = (int) Math.round(car.getCoordinate()[0]);
                 int y = (int) Math.round(car.getCoordinate()[1]);
-                frame.carView.moveit(x, y, car.getClass().getName());
+                frame.carView.moveit(x, y, car.getLicensePlate());
                 // repaint() calls the paintComponent method of the panel
                 frame.carView.repaint();
             }
@@ -118,7 +117,7 @@ public class CarSignal {
         double lower = ((double) amount) / 100;
         for(Car car : cars){
             if (car instanceof Scania){
-                ((Scania) car).lowerPlatform(lower);
+                ((Scania) car).lowerPlatform();
             }
         }
     }
@@ -127,7 +126,7 @@ public class CarSignal {
         double raise = ((double) amount) / 100;
         for(Car car : cars){
             if (car instanceof Scania){
-                ((Scania) car).raisePlatform(raise);
+                ((Scania) car).raisePlatform();
             }
         }
     }
@@ -146,6 +145,18 @@ public class CarSignal {
                 ((Saab95) car).setTurboOff();
             }
         }
+    }
+
+    public void addCarObserver(CarObserver carObserver) {
+        carObservers.add(carObserver);
+    }
+
+    public void removeCarObserver(int index) {
+        carObservers.remove(index);
+    }
+
+    public void notifyCarObserver(CarObserver carObserver) {
+        carObserver.notify();
     }
 
 }
