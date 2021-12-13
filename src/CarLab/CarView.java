@@ -1,54 +1,80 @@
 package CarLab;
 
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.*;
-import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
 // This panel represent the animated part of the view with the car images.
 
-public class CarView extends JPanel implements CarObserver{
+public class CarView extends JPanel implements CarObserver {
 
-    private ArrayList<CarSprite> carSprites = new ArrayList<>();
+    private Map<String, BufferedImage> carSprites = new HashMap<>();
+    private BufferedImage volvo;
+    private BufferedImage saab;
+    private BufferedImage scania;
+    private final CarModel carModel;
 
-    public void createCarSprite(String image, int x, int y, String licencePlate) {
+    // Initializes the panel and reads the images
+    public CarView(CarModel carModel, int x, int y) {
+        this.carModel = carModel;
+        this.setDoubleBuffered(true);
+        this.setPreferredSize(new Dimension(x, y));
+        this.setBackground(Color.gray);
+
         try {
-            carSprites.add(new CarSprite(ImageIO.read(CarView.class.getResourceAsStream(image)), x, y, licencePlate));
+            volvo = ImageIO.read(CarView.class.getResourceAsStream("pics/Volvo240.jpg"));
+            saab = ImageIO.read(CarView.class.getResourceAsStream("pics/Saab95.jpg"));
+            scania = ImageIO.read(CarView.class.getResourceAsStream("pics/scania.jpg"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        carSprites.put("CarLab.Volvo240", volvo);
+        carSprites.put("CarLab.Saab95", saab);
+        carSprites.put("CarLab.Scania", scania);
+
+        //createCarSprite("pics/Volvo240.jpg", 0, 0, "CarLab.Volvo240");
+        //createCarSprite("pics/Saab95.jpg", 0, 100, "CarLab.Saab95");
+        //createCarSprite("pics/Scania.jpg", 0, 200, "CarLab.Scania");
+
+    }
+
+    /*
+    public void createCarSprite(String image, int x, int y, String modelName) {
+        try {
+           new CarSprite(ImageIO.read(CarView.class.getResourceAsStream(image)), x, y, modelName);
         } catch (IOException ex)
         {
             ex.printStackTrace();
         }
     }
+    */
 
-    // TODO: Make this genereal for all cars
-    void moveit(int x, int y, String licencePlate){
-        for (CarSprite carSprite: carSprites) {
-            if (carSprite.getLicencePlate().equals(licencePlate)) {
-                carSprite.moveSprite(x, y);
-            }
+    /*
+    // TODO: Make this general for all cars
+    void moveit() {
+        for (CarSprite carSprite : carSprites) {
+            if (carSprite.getModelName().equals("CarLab.Volvo240"))
+                carSprite.moveSprite(carModel.cars.);
         }
-    }
-
-    // Initializes the panel and reads the images
-    public CarView(int x, int y) {
-        this.setDoubleBuffered(true);
-        this.setPreferredSize(new Dimension(x, y));
-        this.setBackground(Color.gray);
-    }
+    }*/
 
     // This method is called each time the panel updates/refreshes/repaints itself
     // TODO: Change to suit your needs.
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for (CarSprite carSprite: carSprites){
-            g.drawImage(carSprite.getImage(), carSprite.getX()-30, carSprite.getY()-50, null);
+        for (Car car : carModel.getCars()) {
+            g.drawImage(carSprites.get(car.getModelName()), (int)(car.getCoordinate()[0] - 20), (int) (car.getCoordinate()[1] - 30), null);
         }
     }
 
-    //public void notify() {
-
-    //}
+    @Override
+    public void onNotification() {
+        //moveit();
+        repaint();
+    }
 }

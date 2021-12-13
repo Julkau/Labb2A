@@ -7,7 +7,7 @@ import java.awt.*;
  * @see Car
  * @see Platform
  */
-public class Scania extends Car {
+public class Scania extends Car implements PlatformCar{
     private final Platform platform;
 
     /**
@@ -16,8 +16,8 @@ public class Scania extends Car {
      *
      * @param licensePlate is an id-name
      */
-    public Scania(String licensePlate, double x, double y) {
-        super(2, 100, 5, Color.white, "CarLab.Scania", licensePlate, x, y);
+    public Scania(String licensePlate) {
+        super(2, 100, 5, Color.white, "CarLab.Scania", licensePlate);
         platform = new Platform(4);
     }
 
@@ -41,9 +41,9 @@ public class Scania extends Car {
      * @param amount amount The amount of degrees to raise the ramp  by
      * @throws IllegalStateException if car is moving.
      */
-    public void raisePlatform(double amount) throws IllegalStateException{
+    public void raisePlatform() throws IllegalStateException{
         if (getCurrentSpeed() == 0) {
-            platform.raise(amount);
+            platform.raise();
         }
         else {
             throw new IllegalStateException("Can't raise platform when Scania is moving.");
@@ -56,9 +56,9 @@ public class Scania extends Car {
      * @param amount The amount of degrees to lower the ramp  by
      * @throws IllegalStateException if car is moving.
      */
-    public void lowerPlatform(double amount) throws IllegalStateException{
+    public void lowerPlatform() throws IllegalStateException{
         if (getCurrentSpeed() == 0) {
-            platform.lower(amount);
+            platform.lower();
         }
         else {
             throw new IllegalStateException("Can't lower platform when Scania is moving.");

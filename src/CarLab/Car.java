@@ -33,9 +33,9 @@ public abstract class Car implements Movable {
      * @param length       the length of the car.
      * @param licensePlate is the id-name for the car. Should be unique.
      */
-    public Car(int nrDoors, double enginePower, double length, Color color, String modelName, String licensePlate, double x, double y) {
-        this.x = x;
-        this.y = y;
+    public Car(int nrDoors, double enginePower, double length, Color color, String modelName, String licensePlate) {
+        this.x = 0;
+        this.y = 0;
         this.direction = DIRECTION.NORTH;
         this.engineOn = false;
         this.currentSpeed = 0;
@@ -63,6 +63,10 @@ public abstract class Car implements Movable {
      * @return the speed factor with which the car should move.
      */
     protected abstract double speedFactor();
+
+    public String getModelName() {
+        return modelName;
+    }
 
     /**
      * @return number of doors on the car

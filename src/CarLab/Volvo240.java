@@ -16,8 +16,8 @@ public class Volvo240 extends Car {
      * @param licensePlate is an id-name
      */
 
-    public Volvo240(String licensePlate, double x, double y) {
-        super(4, 100, 2.5, Color.black, "CarLab.Volvo240", licensePlate, x, y);
+    public Volvo240(String licensePlate) {
+        super(4, 100, 2.5, Color.black, "CarLab.Volvo240", licensePlate);
     }
 
     /**

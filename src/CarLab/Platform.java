@@ -4,7 +4,7 @@ package CarLab;
  * A platform that can be raised and lowered with an amount within 0 and a maxAngle.
  */
 public class Platform {
-    private final double maxRampAngle;
+    private final double maxPlatformAngle;
     private double platformAngle;
 
     /**
@@ -13,23 +13,21 @@ public class Platform {
      */
     public Platform(double maxRampAngle) {
         this.platformAngle = 0;
-        this.maxRampAngle = maxRampAngle;
+        this.maxPlatformAngle = maxRampAngle;
     }
 
     /**
      * Raise ramp increases the angle of the ramp, represented by increasing rampAngle to a max angle of maxRampAngle.
-     * @param amount The amount to increase rampAngle by.
      */
-    public void raise(double amount) {
-        platformAngle = Math.min(getAngle() + amount, maxRampAngle);
+    public void raise() {
+        platformAngle = Math.min(getAngle() + 1, maxPlatformAngle);
     }
 
     /**
      * Lower ramp reduces the angle of the ramp, represented by reducing rampAngle, to a min angle of 0.
-     * @param amount The amount to reduce rampAngle by.
      */
-    public void lower(double amount) {
-        platformAngle = Math.max(getAngle() - amount, 0);
+    public void lower() {
+        platformAngle = Math.max(getAngle() - 1, 0);
     }
 
      /**

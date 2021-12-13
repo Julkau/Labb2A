@@ -4,15 +4,14 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
 
 /*
-* This class represents the Controller part in the MVC pattern.
+* This class represents (one of) the Model part in the MVC pattern.
 * It's responsibilities is to listen to the View and responds in a appropriate manner by
 * modifying the model state and the updating the view.
  */
 
-public class CarSignal {
+public class CarModel {
     // member fields:
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
@@ -22,23 +21,14 @@ public class CarSignal {
     private Timer timer = new Timer(delay, new TimerListener());
 
     // A list of cars, modify if needed
-    ArrayList<Car> cars = new ArrayList<>();
+    private final ArrayList<Car> cars;
 
     //Observers (Wishful programming)
     private ArrayList<CarObserver> carObservers = new ArrayList<>();
 
-    //methods:
-
-    public static void main(String[] args) {
-        // Instance of this class
-        CarSignal cc = new CarSignal();
-
-        cc.cars.add(new Volvo240("GYU438", 0, 0));
-        cc.cars.add(new Saab95("AND334", 0, 100));
-        cc.cars.add(new Scania("OOI134", 0, 200));
-
-        // Start the timer
-        cc.timer.start();
+    public CarModel(ArrayList<Car> cars){
+        this.cars = cars;
+        this.timer.start();
     }
 
     /* Each step the TimerListener moves all the cars in the list and tells the
@@ -50,11 +40,16 @@ public class CarSignal {
                 car.move();
                 int x = (int) Math.round(car.getCoordinate()[0]);
                 int y = (int) Math.round(car.getCoordinate()[1]);
-                frame.carView.moveit(x, y, car.getLicensePlate());
+                //frame.carView.moveit(x, y, car.getLicensePlate());
                 // repaint() calls the paintComponent method of the panel
-                frame.carView.repaint();
+                //frame.carView.repaint();
+                notifyCarObservers();
             }
         }
+    }
+
+    public ArrayList<Car> getCars(){
+        return cars;
     }
 
     // Calls the gas method for each car once
@@ -112,21 +107,19 @@ public class CarSignal {
             }
         }
     }
-    void lowerPlatform(int amount) {
+    void lowerPlatform() {
         System.out.println("lower platform");
-        double lower = ((double) amount) / 100;
         for(Car car : cars){
-            if (car instanceof Scania){
-                ((Scania) car).lowerPlatform();
+            if (car instanceof PlatformCar){
+                ((PlatformCar) car).lowerPlatform();
             }
         }
     }
-    void raisePlatform(int amount){
+    void raisePlatform(){
         System.out.println("raise platform");
-        double raise = ((double) amount) / 100;
         for(Car car : cars){
-            if (car instanceof Scania){
-                ((Scania) car).raisePlatform();
+            if (car instanceof PlatformCar){
+                ((PlatformCar) car).raisePlatform();
             }
         }
     }
@@ -155,8 +148,10 @@ public class CarSignal {
         carObservers.remove(index);
     }
 
-    public void notifyCarObserver(CarObserver carObserver) {
-        carObserver.notify();
+    public void notifyCarObservers() {
+        for(CarObserver cO : carObservers) {
+            cO.onNotification();
+        }
     }
 
 }

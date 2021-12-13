@@ -15,8 +15,8 @@ public class Saab95 extends Car {
      *
      * @param licensePlate is an id-name
      */
-    public Saab95(String licensePlate, double x, double y) {
-        super(2, 125, 2.5, Color.red, "CarLab.Saab95", licensePlate, x, y);
+    public Saab95(String licensePlate) {
+        super(2, 125, 2.5, Color.red, "CarLab.Saab95", licensePlate);
         turboOn = false;
     }
 

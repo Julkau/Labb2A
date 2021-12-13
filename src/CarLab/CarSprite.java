@@ -6,13 +6,13 @@ public class CarSprite {
     private BufferedImage image;
     private int x;
     private int y;
-    private String licencePlate;
+    private String modelName;
 
-    public CarSprite(BufferedImage image, int x, int y, String licencePlate) {
+    public CarSprite(BufferedImage image, int x, int y, String modelName) {
         this.image = image;
         this.x = x;
         this.y = y;
-        this.licencePlate = licencePlate;
+        this.modelName = modelName;
     }
 
     public void moveSprite(int x, int y) {
@@ -32,7 +32,7 @@ public class CarSprite {
         return y;
     }
 
-    public String getLicencePlate() {
-        return licencePlate;
+    public String getModelName(){
+        return modelName;
     }
 }

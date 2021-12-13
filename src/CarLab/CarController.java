@@ -6,6 +6,8 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -19,13 +21,8 @@ public class CarController extends JFrame{
     private static final int X = 800;
     private static final int Y = 800;
 
-    // The controller member
-    CarSignal carC;
-
-    CarView carView = new CarView(X, Y-240);
-
+    CarModel carModel;
     JPanel controlPanel = new JPanel();
-
     JPanel gasPanel = new JPanel();
     JSpinner gasSpinner = new JSpinner();
     int gasAmount = 0;
@@ -44,22 +41,19 @@ public class CarController extends JFrame{
     JButton stopButton = new JButton("Stop all cars");
 
     // Constructor
-    public CarController(String frameName, CarSignal cc){
-        this.carC = cc;
-        initComponents(frameName);
+    public CarController(String frameName, CarModel carModel, CarView carView){
+        this.carModel = carModel;
+        initComponents(frameName, carView);
     }
 
     // Sets everything in place and fits everything
     // TODO: Take a good look and make sure you understand how these methods and components work
-    private void initComponents(String title) {
+    private void initComponents(String title, CarView carView) {
 
         this.setTitle(title);
         this.setPreferredSize(new Dimension(X,Y));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
-
         this.add(carView);
-
-
 
         SpinnerModel spinnerModel =
                 new SpinnerNumberModel(0, //initial value
@@ -110,56 +104,56 @@ public class CarController extends JFrame{
         gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.gas(gasAmount);
+                carModel.gas(gasAmount);
             }
         });
         // Brake button.
         brakeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.brake(gasAmount);
+                carModel.brake(gasAmount);
             }
         });
         // Turbo button
         turboOnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.turnTurboOn();
+                carModel.turnTurboOn();
             }
         });
         // Turbo off button
         turboOffButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.turnTurboOff();
+                carModel.turnTurboOff();
             }
         });
         // Lift bed
         liftBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.raisePlatform(gasAmount);
+                carModel.raisePlatform();
             }
         });
         // Lower bed
         lowerBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.lowerPlatform(gasAmount);
+                carModel.lowerPlatform();
             }
         });
 
         turnLeftButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.turnLeft();
+                carModel.turnLeft();
             }
         });
 
         turnRightButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.turnRight();
+                carModel.turnRight();
             }
         });
 
@@ -167,7 +161,7 @@ public class CarController extends JFrame{
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.startEngine();
+                carModel.startEngine();
 
             }
         });
@@ -175,13 +169,14 @@ public class CarController extends JFrame{
         stopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.stopEngine();
+                carModel.stopEngine();
             }
         });
 
         brakeButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {carC.brake(0);
+            public void actionPerformed(ActionEvent e) {
+                carModel.brake(0);
             }
         });
 
