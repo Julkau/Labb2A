@@ -37,31 +37,7 @@ public class CarView extends JPanel implements CarObserver {
         carSprites.put("CarLab.Saab95", saab);
         carSprites.put("CarLab.Scania", scania);
 
-        //createCarSprite("pics/Volvo240.jpg", 0, 0, "CarLab.Volvo240");
-        //createCarSprite("pics/Saab95.jpg", 0, 100, "CarLab.Saab95");
-        //createCarSprite("pics/Scania.jpg", 0, 200, "CarLab.Scania");
-
     }
-
-    /*
-    public void createCarSprite(String image, int x, int y, String modelName) {
-        try {
-           new CarSprite(ImageIO.read(CarView.class.getResourceAsStream(image)), x, y, modelName);
-        } catch (IOException ex)
-        {
-            ex.printStackTrace();
-        }
-    }
-    */
-
-    /*
-    // TODO: Make this general for all cars
-    void moveit() {
-        for (CarSprite carSprite : carSprites) {
-            if (carSprite.getModelName().equals("CarLab.Volvo240"))
-                carSprite.moveSprite(carModel.cars.);
-        }
-    }*/
 
     // This method is called each time the panel updates/refreshes/repaints itself
     // TODO: Change to suit your needs.
@@ -74,7 +50,6 @@ public class CarView extends JPanel implements CarObserver {
 
     @Override
     public void onNotification() {
-        //moveit();
         repaint();
     }
 }

@@ -40,9 +40,6 @@ public class CarModel {
                 car.move();
                 int x = (int) Math.round(car.getCoordinate()[0]);
                 int y = (int) Math.round(car.getCoordinate()[1]);
-                //frame.carView.moveit(x, y, car.getLicensePlate());
-                // repaint() calls the paintComponent method of the panel
-                //frame.carView.repaint();
                 notifyCarObservers();
             }
         }
