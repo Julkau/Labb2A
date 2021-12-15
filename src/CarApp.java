@@ -20,6 +20,9 @@ public class CarApp {
         Saab95 saab = new Saab95("abc124");
         Scania scania = new Scania("abc125");
 
+        saab.setCoordinate(0, 100);
+        scania.setCoordinate(0, 200);
+
         ArrayList<Car> carsList = new ArrayList<>();
 
         carsList.add(volvo);
